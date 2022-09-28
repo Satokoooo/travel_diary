@@ -18,9 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('diary/create','App\Http\Controllers\DiaryController@add')->middleware('auth');
-Route::get('diary/edit','App\Http_Controllers\DiaryController@edit')->middleware('auth');
+Route::get('diary/edit','App\Http\Controllers\DiaryController@edit')->middleware('auth');
 Route::get('profile/create','App\Http\Controllers\ProfileController@add')->middleware('auth');
-Route::get('profile/edit','App\Fttp\Controllers\ProfileController@edit')->middleware('auth');
+Route::get('profile/edit','App\Http\Controllers\ProfileController@edit')->middleware('auth');
 
 Auth::routes();
 
