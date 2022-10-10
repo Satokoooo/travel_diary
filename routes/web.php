@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('diary','App\Http\Controllers\DiaryController@index')->middleware('auth');
 Route::get('diary/create','App\Http\Controllers\DiaryController@add')->middleware('auth');
 Route::post('diary/create','App\Http\Controllers\DiaryController@create')->name('diary.create');
 Route::get('diary/edit','App\Http\Controllers\DiaryController@edit')->middleware('auth');
