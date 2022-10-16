@@ -52,12 +52,14 @@ class DiaryController extends Controller
         $cond_title = $request->cond_title;
         if($cond_title !=''){
             //検索された検索結果を取得する
-            $posts = Diary::where('title', $cond_title)->get();
+            $posts = Diary::where('title', $cond_title)->sortable()->get();
         }else{
             //それ以外は全て取得
-            $posts = Diary::all();
+            $posts = Diary::sortable()->get();
         }
+        
         return view('diary.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+        
     }
     
     // 詳細画面
@@ -104,4 +106,15 @@ class DiaryController extends Controller
         
         return redirect()->route('diary.index');
     }
+    
+    //削除機能
+    public function destroy($id)
+    {
+        $diary = Diary::find($id);
+        // dd($id);
+        $diary->delete();
+        
+        return redirect(route('diary.index'));
+    }
+    
 }

@@ -27,17 +27,18 @@
                         </div>
                     </div>
                     <div class="form-group row mb-4">
-                        <label class="col-md-2">宿泊数</label>
+                        <label class="col-md-2">帰宅日</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="arrived_date" value="{{ old('arrived_date') }}">
+                            <input type="date" class="form-control" name="arrived_date" value="{{ old('arrived_date') }}">
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <label class="col-md-2">カテゴリ</label>
                         <div class="col-md-10">
                             <select class="form-select" name="category" value="{{ old('category') }}">
-                                <option value="category">カテゴリ１</option>
-                                <option value="">カテゴリ２</option>
+                                <option value="category1">カテゴリ１</option>
+                                <option value="category2">カテゴリ２</option>
+                                <option value="category3">カテゴリ３</option>
                             </select>
                         </div>
                     </div>
