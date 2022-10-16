@@ -17,14 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('diary',[App\Http\Controllers\DiaryController::class, 'index'])->name('diary.index')->middleware('auth');
-Route::get('/show/{id}', [App\Http\Controllers\DiaryController::class, 'show'])->name('diary.show');
+Route::get('/diary',[App\Http\Controllers\DiaryController::class, 'index'])->name('diary.index')->middleware('auth');
+Route::get('/show/{id}', [App\Http\Controllers\DiaryController::class, 'show'])->name('diary.show')->middleware('auth');
 Route::get('diary/create','App\Http\Controllers\DiaryController@add')->middleware('auth');
-Route::post('diary/create','App\Http\Controllers\DiaryController@create')->name('diary.create');
+Route::post('diary/create','App\Http\Controllers\DiaryController@create')->name('diary.create')->middleware('auth');
 Route::get('diary/edit/{id}',[App\Http\Controllers\DiaryController::class, 'edit'])->name('diary.edit')->middleware('auth');
-Route::post('/update/{id}', [App\Http\Controllers\DiaryController::class, 'update'])->name('diary.update');
-Route::get('profile/create','App\Http\Controllers\ProfileController@add')->middleware('auth');
-Route::get('profile/edit','App\Http\Controllers\ProfileController@edit')->middleware('auth');
+Route::post('/update/{id}', [App\Http\Controllers\DiaryController::class, 'update'])->name('diary.update')->middleware('auth');
+Route::delete('/destroy/{id}', [App\Http\Controllers\DiaryController::class, 'destroy'])->name('diary.delete')->middleware('auth');
+
+
+Route::get('category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.index')->middleware('auth');
 
 Auth::routes();
 

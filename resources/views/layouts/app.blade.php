@@ -56,7 +56,7 @@
                                 <a class="nav-link" href="{{ url('diary') }}">ホーム</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('diary/category') }}">カテゴリ</a>
+                                <a class="nav-link" href="{{ url('category') }}">カテゴリ管理</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

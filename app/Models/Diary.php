@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Diary extends Model
 {
     use HasFactory;
+    use Sortable;
     
     protected $guarded = array('id');
     
@@ -16,4 +18,11 @@ class Diary extends Model
         'text' => 'required',
         'category' => 'required',
     );
+    
+    public $sortable =
+    [
+        'id',
+        'departure_date',
+        'updated_at',
+    ];
 }
