@@ -19,11 +19,11 @@
         </div>
         <div class="row mb-5">
             <div class="col-md-4 mb-2">
-                <select class="form-select" name="category" value="">
+                <select class="form-select" name="category" value="{{ old('category_id') }}">
                     <option value="" selected hidden>全てのカテゴリ</option>
-                    <option value="category1">カテゴリ１</option>
-                    <option value="category2">カテゴリ２</option>
-                    <option value="category3">カテゴリ３</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->category_id }}">{{ $category->name }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="col-md-3 mb-2">
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="col-md-6 mb-2">
-            <a href="{{ action('App\Http\Controllers\DiaryController@add') }}" role="button" class="btn btn-primary">新規作成</a>
+            <a href="{{ route('diary.add') }}" role="button" class="btn btn-primary">新規作成</a>
         </div>
         <div class="row">
             <div class="list-diary col-md-12 mx-auto">
@@ -46,7 +46,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th width="30%">タイトル</th>
+                                <th width="30%">@sortablelink('title', 'タイトル')</th>
                                 <th width="25%">@sortablelink('departure_date', '出発日')</th>
                                 <th width="30%">カテゴリ</th>
                                 <th width="15%">詳細</th>
@@ -56,7 +56,7 @@
                                 <tr>
                                     <td>{{ Str::limit($diary->title, 100) }}</td>
                                     <td>{{ ($diary->departure_date)}}</td>
-                                    <td>{{ Str::limit($diary->category, 100) }}</td>
+                                    <td>{{ Str::limit($diary->category->name, 100) }}</td>
                                     <td><a href="{{ route('diary.show', ['id'=>$diary->id]) }}" class="btn btn-warning btn-sm">詳細</a></td>
                                 </tr>
                                 @endforeach

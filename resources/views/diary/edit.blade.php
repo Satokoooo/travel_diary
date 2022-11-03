@@ -35,9 +35,10 @@
                     <div class="form-group row mb-4">
                         <label class="col-md-2">カテゴリ</label>
                         <div class="col-md-10">
-                            <select class="form-select" name="category" value="{{ $diary->category }}">
-                                <option value="category">カテゴリ１</option>
-                                <option value="">カテゴリ２</option>
+                            <select class="form-select" name="category_id" value="{{ $diary->category_id }}">
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
                             </select>
                         </div>
                     </div>

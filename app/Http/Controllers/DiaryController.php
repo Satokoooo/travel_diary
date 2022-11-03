@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Models\Diary;
+use \App\Models\Category;
 use Auth;
 
 
@@ -11,15 +12,18 @@ class DiaryController extends Controller
     //新規追加画面
     public function add()
     {
-        return view('diary.create');
+        $categories = Category::get();
+        return view('diary.create', ['categories' => $categories]);
     }
     
      //新規追加画面
     public function create(Request $request)
     {
       // Validationを行う
+    //   dd($request);
+    // dd($request);
       $this->validate($request, Diary::$rules);
-      
+     
       $diary = new Diary;
       $form = $request->all();
       
@@ -36,6 +40,8 @@ class DiaryController extends Controller
       
       //フォームから送信されてきたimageを削除する
        unset($form['image']);
+       
+       $categories = Category::get();
       
       //データベースに保存する
        $diary->fill($form);
@@ -43,7 +49,7 @@ class DiaryController extends Controller
        $diary->save();
       
       // diary/createにリダイレクトする
-      return redirect('diary/create');
+      return redirect('diary');
     }
     
     //一覧画面
@@ -58,7 +64,9 @@ class DiaryController extends Controller
             $posts = Diary::sortable()->get();
         }
         
-        return view('diary.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+        $categories = Category::get();
+        
+        return view('diary.index', ['posts' => $posts, 'cond_title' => $cond_title, 'categories' => $categories]);
         
     }
     
@@ -77,7 +85,9 @@ class DiaryController extends Controller
         if (empty($diary)){
             abort(404);
         }
-        return view('diary.edit', compact('diary'));
+        
+        $categories = Category::get();
+        return view('diary.edit', compact('diary'), ['categories' => $categories]);
     }
     
     public function update(Request $request, $id)
@@ -114,7 +124,7 @@ class DiaryController extends Controller
         // dd($id);
         $diary->delete();
         
-        return redirect(route('diary.index'));
+        return redirect()->route('diary.index');
     }
     
 }

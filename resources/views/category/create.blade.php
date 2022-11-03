@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2 class="mb-5">カテゴリ管理</h2>
-                <form action="{{ action('App\Http\Controllers\CategoryController@index') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('category.create') }}" method="POST" enctype="multipart/form-data">
                     @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
@@ -17,7 +17,7 @@
                     <label>新規カテゴリ</label>
                     <div class="form-group row mb-5">
                         <div class="col-md-10">
-                            <input type="category" class="form-control" name="category" value="{{ old('category') }}">
+                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                         </div>
                         <input type="submit" class="btn btn-primary col-md-2" value="登録">
                     </div>
@@ -25,25 +25,12 @@
                 </form>
             </div>
             <div class="list-diary col-md-8 mx-auto">
-                <div class="row">
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th width="70%">カテゴリ一覧</th>
-                                <th width="15%"></th>
-                                <th width="15%"></th>
-                            </tr>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td><a>詳細</a></td>
-                                    <td><a>削除</a></td>
-                                </tr>
-                                
-                            </tbody>
-                        </thead>
-                    </table>
+                <div id="app">
+                    <modal></modal>
                 </div>
         </div>
     </div>
+    <!--<script src="https://www.promisejs.org/polyfills/promise-7.0.4.min.js"></script>-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 @endsection

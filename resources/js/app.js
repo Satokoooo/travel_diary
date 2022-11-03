@@ -5,6 +5,7 @@
  */
 
 import './bootstrap';
+import './script';
 import { createApp } from 'vue';
 
 /**
@@ -12,11 +13,15 @@ import { createApp } from 'vue';
  * registering components with the application instance so they are ready
  * to use in your application's views. An example is included for you.
  */
-
+window.Vue = require('vue');
 const app = createApp({});
 
 import ExampleComponent from './components/ExampleComponent.vue';
+import Modal from "./components/Modal";
 app.component('example-component', ExampleComponent);
+app.component('modal', Modal);
+// app.mount('#app');
+
 
 /**
  * The following block of code may be used to automatically register your
