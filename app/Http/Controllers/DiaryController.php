@@ -55,18 +55,40 @@ class DiaryController extends Controller
     //一覧画面
     public function index(Request $request)
     {
-        $cond_title = $request->cond_title;
-        if($cond_title !=''){
-            //検索された検索結果を取得する
-            $posts = Diary::where('title', $cond_title)->sortable()->get();
-        }else{
-            //それ以外は全て取得
-            $posts = Diary::sortable()->get();
+        // $cond_title = $request->cond_title;
+        // if($cond_title !=''){
+        //     //検索された検索結果を取得する
+        //     $posts = Diary::where('title', $cond_title)->sortable()->get();
+        // }else{
+        //     //それ以外は全て取得
+        //     $posts = Diary::sortable()->get();
+        // }
+        
+        
+        $cond_title = $request->input('cond_title');
+        $category = $request->input('category');
+        $departure_date = $request->input('departure_date');
+        
+        $query = Diary::query();
+        $query->join('categories',function($query) use ($request){
+            $query->on('diaries.category_id', '=', 'categories.id');
+        });
+        
+        if(!empty($cond_title)) {
+            $query->where('title', 'LIKE', "%{$cond_title}%");
         }
+        if(!empty($category)) {
+            $query->where('category_id', '=', $category);
+        }
+        if(!empty($departure_date)) {
+            $query->where('departure_date', '=', $departure_date);
+        }
+        // dd($query);
+        $posts = $query->sortable()->get();
+        $categories = Category::all();
         
-        $categories = Category::get();
         
-        return view('diary.index', ['posts' => $posts, 'cond_title' => $cond_title, 'categories' => $categories]);
+        return view('diary.index', compact('posts', 'cond_title', 'category', 'departure_date'),['categories' => $categories]);
         
     }
     
@@ -121,7 +143,6 @@ class DiaryController extends Controller
     public function destroy($id)
     {
         $diary = Diary::find($id);
-        // dd($id);
         $diary->delete();
         
         return redirect()->route('diary.index');

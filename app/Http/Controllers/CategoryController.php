@@ -33,16 +33,5 @@ class CategoryController extends Controller
         return view('category.create');
     }
     
-    public function delete($id)
-    {
-        // $category = Category::find($id);
-        // $category->delete();
-        
-        // return redirect()->route('category.index');
-        // $category = Category::find($id);
-        // $category->delete();
-        //     return response()->json(['success' => 'category deleted successfully!']);
-    }
-    
     
 }

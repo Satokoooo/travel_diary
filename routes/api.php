@@ -22,9 +22,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('categories', function(){
     return App\Models\Category::all();
 });
+
 Route::delete('categories/{id}',function($id){
     $category = App\Models\Category::find($id);
     $category->delete();
     return response()->json([
         'success' => 'category deleted successfully!']);
+});
+
+Route::patch('category/{id}', function($id, Request $request){
+    $category = App\Models\Category::find($id);
+    $category->update($request->all());
+    return $category;
 });

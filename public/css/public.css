@@ -46,8 +46,8 @@
 .p-modal__btn--close:after {
   content: "";
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 15px;
+  right: 10px;
   width: 3px; /* 棒の幅（太さ） */
   height: 30px; /* 棒の高さ */
   background: #000;
@@ -70,7 +70,7 @@
   width: 30px;
   height: 30px;
   position: absolute;
-  top: 25px;
+  top: 10px;
   right: 25px;
 }
 
