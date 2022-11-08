@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2 class="mb-5">旅行記登録</h2>
-                <form action="{{ action('App\Http\Controllers\DiaryController@create') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('diary.create') }}" method="POST" enctype="multipart/form-data">
                     @if (count($errors) > 0)
                         <ul>
                             @foreach($errors->all() as $e)
@@ -35,10 +35,10 @@
                     <div class="form-group row mb-4">
                         <label class="col-md-2">カテゴリ</label>
                         <div class="col-md-10">
-                            <select class="form-select" name="category" value="{{ old('category') }}">
-                                <option value="category1">カテゴリ１</option>
-                                <option value="category2">カテゴリ２</option>
-                                <option value="category3">カテゴリ３</option>
+                            <select class="form-select" name="category_id" value="{{ old('category_id') }}">
+                                @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
