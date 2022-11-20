@@ -70,10 +70,12 @@ class DiaryController extends Controller
         $departure_date = $request->input('departure_date');
         
         $query = Diary::query();
-        $query->join('categories',function($query) use ($request){
-            $query->on('diaries.category_id', '=', 'categories.id');
+        $query->select('diaries.id as id','diaries.title','diaries.text',
+        'diaries.category_id as category_id','diaries.departure_date as departure_date',
+        'diaries.arrived_date as arrived_date')
+        ->join('categories',function($query) use ($request){
+        $query->on('diaries.category_id', '=', 'categories.id');
         });
-        
         if(!empty($cond_title)) {
             $query->where('title', 'LIKE', "%{$cond_title}%");
         }
@@ -84,9 +86,9 @@ class DiaryController extends Controller
             $query->where('departure_date', '=', $departure_date);
         }
         // dd($query);
+        // $posts = $query->sortable()->get();
         $posts = $query->sortable()->get();
         $categories = Category::all();
-        
         
         return view('diary.index', compact('posts', 'cond_title', 'category', 'departure_date'),['categories' => $categories]);
         
