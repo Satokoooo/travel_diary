@@ -46,9 +46,9 @@
                             <tbody>
                                 @foreach($posts as $diary)
                                 <tr>
-                                    <td>{{ Str::limit($diary->title, 100) }}{{ $diary->id }}</td>
+                                    <td>{{ Str::limit($diary->title, 20) }}</td>
                                     <td>{{ ($diary->departure_date)}}</td>
-                                    <td>{{ Str::limit($diary->category->name, 100) }}</td>
+                                    <td>{{ Str::limit($diary->category->name, 10) }}</td>
                                     <td><a href="{{ route('diary.show', ['id'=>$diary->id]) }}" class="btn btn-warning btn-sm">詳細</a></td>
                                 </tr>
                                 @endforeach

@@ -16,7 +16,7 @@ class Diary extends Model
     public static $rules = array(
         'title' => 'required',
         'text' => 'required',
-        'category' => 'required',
+        'category_id' => 'required',
     );
     
     public $sortable =
